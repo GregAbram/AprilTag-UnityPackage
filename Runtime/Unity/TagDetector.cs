@@ -25,11 +25,13 @@ public sealed class TagDetector : System.IDisposable
 
     #region Constructor
 
-    public TagDetector(int width, int height, int decimation = 2)
+    public TagDetector(int width, int height, int decimation = 2, string family = "TagStandard41h12")
     {
-        // Object creation
         _detector = Interop.Detector.Create();
-        _family = Interop.Family.CreateTagStandard41h12();
+        if (family == "Tag36h11")
+            _family = Interop.Family.CreateTag36h11();
+        else
+            _family = Interop.Family.CreateTagStandard41h12();
         _image = Interop.ImageU8.Create(width, height);
 
         // Detector configuration
